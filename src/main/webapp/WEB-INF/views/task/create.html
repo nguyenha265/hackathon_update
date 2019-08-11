@@ -10,9 +10,9 @@
 <center class="text-danger"><h2 style="font-size: 50px">Thêm công việc</h2></center>
     <center></center>
 <p style="margin-top: 10px"></p>
-<th:block th:if="${message}">
+<h3><th:block th:if="${message}">
     <th th:text="${message}"></th>
-</th:block>
+</th:block></h3>
 <div>
     <center>
     <form th:action="@{/save-task}" th:object="${task}" method="post">
