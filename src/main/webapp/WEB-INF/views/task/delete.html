@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3><a href="/home" class="btn btn-primary"><i class="fa fa-home"></i> Quay lại trang quản lý</a></h3>
+<div style="margin-top: 200px">
+<center  class="text-danger"><h2 style="font-size: 50px">Xóa công việc</h2></center>
+<th:block th:if="${message}">
+    <th th:text="${message}"></th>
+</th:block>
+<center>
+<form th:action="@{/delete-task}" method="post">
+    <table>
+        <input type="hidden" th:field="*{task.id}">
+        <tr>
+            <th>Tên:</th>
+            <td><p th:text="${task.name}"></p></td>
+        </tr>
+        <tr>
+            <th>Thời gian: </th>
+            <td><p th:text="${task.time}"></td>
+        </tr>
+        <tr>
+            <th> Trạng thái: </th>
+            <td><p th:text="${task.status}"></td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/home" class="btn btn-danger"><i class="fa fa-trash"></i> Xóa</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</center>
+<footer th:replace="layout :: footer"></footer>
+</div>
+</body>
+</html>

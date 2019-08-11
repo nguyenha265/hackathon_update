@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>Cập nhật công việc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<h3><a href="/home" class="btn btn-primary"><i class="fa fa-home"></i> Quay lại trang quản lý</a></h3>
+<div style="margin-top: 200px">
+<center class="text-danger"><h2 style="font-size: 50px">Cập nhật công việc</h2></center>
+<th:block th:if="${message}">
+    <th th:text="${message}"></th>
+</th:block>
+<form th:action="@{/edit-task}" th:object="${task}" method="post">
+    <center><table>
+        <input type="hidden" th:field="*{id}">
+        <tr>
+            <th>Tên Công Việc:</th>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <th> Thời gian:</th>
+            <td><input type="date" th:field="*{time}"></td>
+        </tr>
+        <tr>
+            <th> Trạng thái:</th>
+            <td>
+                <select th:field="*{status}">
+                <option value="Quan trọng-Khẩn Cấp">Quan trọng-Khẩn Cấp</option>
+                <option value="Khẩn Cấp-ít Quan Trọng">Khẩn Cấp-ít Quan Trọng</option>
+                <option value="Quan Trọng-ít khẩn cấp">Quan Trọng-ít khẩn cấp</option>
+                <option value="Không quan trọng-Không khẩn cấp">Không quan trọng-Không khẩn cấp</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-folder"></i> Save</button>
+                <a href="/home" class="btn btn-danger"><i class="fa fa-close"></i> Hủy</a>
+            </td>
+        </tr>
+    </table>
+    </center>
+</form>
+<footer th:replace="layout :: footer"></footer>
+</div>
+</body>
+</html>

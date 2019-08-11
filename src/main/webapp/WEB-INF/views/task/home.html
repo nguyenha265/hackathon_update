@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>Quản lí công việc </title>
+</head>
+<body>
+<div class="container-fluid">
+    <center><h1 class="text-danger" style="font-size: 50px">Quản lí công việc </h1></center>
+    <nav>
+        <a href="/create-task" class="btn btn-success">+ Thêm công việc</a>
+    </nav>
+    <div>
+        <form class="searchName">
+            <input type="text" name="searchName" placeholder="Tìm Theo chữ cái đầu" >
+            <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-search"></i> Tìm</button>
+        </form>
+        <form>
+            <select name="sortByStatus">
+                <option value="Quan trọng-Khẩn Cấp">Quan trọng-Khẩn Cấp</option>
+                <option value="Khẩn Cấp-ít Quan Trọng">Khẩn Cấp-ít Quan Trọng</option>
+                <option value="Quan Trọng-ít khẩn cấp">Quan Trọng-ít khẩn cấp</option>
+                <option value="Không quan trọng-Không khẩn cấp">Không quan trọng-Không khẩn cấp</option>
+            </select>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> chọn</button>
+        </form>
+    </div>
+    <table class="table table-bordered">
+        <tr class="table-primary">
+            <td>Tên Công việc</td>
+            <td>Thời gian</td>
+            <td>Trạng thái</td>
+            <td>Hành động</td>
+        </tr>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.name}" class="p-3 mb-2 bg-success text-white"></td>
+            <td th:text="${task.getTime()}" class="p-3 mb-2 bg-warning text-dark"></td>
+            <td th:text="${task.status}" class="p-3 mb-2 bg-light text-dark"></td>
+            <td>
+                <a th:href="@{/edit-task/__${task.getId()}__}" class="btn btn-warning">Sửa</a>
+                <a th:href="@{/delete-task/__${task.getId()}__}" class="btn btn-danger">Xóa</a>
+            </td>
+        </tr>
+    </table>
+
+    <div><center><h3>
+        <a th:href="@{'/home'(page=${tasks.number - 1})}" th:if="${tasks.hasPrevious()}">Trước</a>
+        <span th:text="${tasks.number + 1}"></span>/<span th:text="${tasks.totalPages}"></span>
+        <a th:href="@{'/home'(page=${tasks.number + 1})}" th:if="${tasks.hasNext()}">Tiếp</a>
+    </h3>
+    </center>
+    </div>
+</div>
+</body>
+<footer th:replace="layout :: footer"></footer>
+
+</html>

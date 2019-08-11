@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <meta charset="UTF-8">
+    <title>Thêm công việc</title>
+</head>
+<body>
+<h3><a href="/home" class="btn btn-primary"><i class="fa fa-home"></i> Quay lại trang quản lý</a></h3>
+<div style="margin-top: 200px">
+<center class="text-danger"><h2 style="font-size: 50px">Thêm công việc</h2></center>
+    <center></center>
+<p style="margin-top: 10px"></p>
+<th:block th:if="${message}">
+    <th th:text="${message}"></th>
+</th:block>
+<div>
+    <center>
+    <form th:action="@{/save-task}" th:object="${task}" method="post">
+        <table>
+            <tr>
+                <th>Tên:</th>
+                <td><input type="text" th:field="*{name}"></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            </tr>
+            <tr>
+                <th>Thời gian:</th>
+                <td><input type="date" th:field="*{time}"></td>
+                <td th:if="${#fields.hasErrors('time')}" th:errors="Bạn chưa thêm thời gian">time Error</td>
+            </tr>
+            <tr>
+                <th>Trạng thái:</th>
+                <td>
+                    <select th:field="*{status}">
+                        <option value="Quan trọng-Khẩn Cấp">Quan trọng-Khẩn Cấp</option>
+                        <option value="Khẩn Cấp-ít Quan Trọng">Khẩn Cấp-ít Quan Trọng</option>
+                        <option value="Quan Trọng-ít khẩn cấp">Quan Trọng-ít khẩn cấp</option>
+                        <option value="Không quan trọng-Không khẩn cấp">Không quan trọng-Không khẩn cấp</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-folder"></i> Lưu</button>
+                    <a href="/home" class="btn btn-danger"><i class="fa fa-close"></i> Hủy</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </center>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</div>
+</body>
+</html>
