@@ -14,7 +14,6 @@ public class Task {
     private LocalDate time;
     private String status;
 
-
     public Task() {
     }
 

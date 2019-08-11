@@ -32,7 +32,9 @@ public class TaskController {
         } else {
             tasks = taskService.finAll(pageable);
         }
+        long count = tasks.getTotalElements();
         ModelAndView modelAndView = new ModelAndView("task/home", "tasks", tasks);
+        modelAndView.addObject("count", count);
         return modelAndView;
     }
 
@@ -46,7 +48,7 @@ public class TaskController {
         if (result.hasErrors()) {
             return new ModelAndView("task/create");
         } else {
-                taskService.save(task);
+            taskService.save(task);
             ModelAndView modelAndView = new ModelAndView("task/create", "task", new Task());
             modelAndView.addObject("message", " New Task created successfully");
             return modelAndView;
